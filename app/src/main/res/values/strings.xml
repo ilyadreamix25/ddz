@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ДеДЗ</string>
+    <string name="dev_version" translatable="false">DP v%1$s</string>
+
+    <string name="alert_close">Закрити</string>
+    <string name="alert_ok">Ок</string>
+
+    <string name="select_grade">Оберіть свій клас</string>
+    <string name="grade_f">%1$d клас</string>
+</resources>
