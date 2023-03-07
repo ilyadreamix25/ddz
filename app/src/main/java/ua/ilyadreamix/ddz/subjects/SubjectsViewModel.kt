@@ -13,18 +13,27 @@ import it.skrape.selects.html5.table
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import ua.ilyadreamix.ddz.etc.ResponseState
+import ua.ilyadreamix.ddz.etc.ResponseStateModel
 import ua.ilyadreamix.ddz.etc.VSHKOLE_URL
 import java.net.URL
 
 class SubjectsViewModel : ViewModel() {
-    private var _subjects: MutableState<List<SubjectModel>> = mutableStateOf(emptyList())
-    val subjects: State<List<SubjectModel>> = _subjects
+    private var _subjectsState: MutableState<SubjectsState> = mutableStateOf(SubjectsState())
+    val subjectsState: State<SubjectsState> = _subjectsState
 
     fun updateSubjects(grade: Int) = viewModelScope.launch {
-        _subjects.value = fetch(grade)
+        _subjectsState.value = SubjectsState(state = ResponseState.Loading)
+        try {
+            _subjectsState.value = SubjectsState(
+                state = ResponseState.Success,
+                data = fetch(grade)
+            )
+        } catch (_: Exception) {
+            _subjectsState.value = SubjectsState(state = ResponseState.Error)
+        }
     }
 
-    // TODO: Errors handling
     private suspend fun fetch(grade: Int) = withContext(Dispatchers.IO) {
         htmlDocument(URL("$VSHKOLE_URL/$grade-klass/reshebniki").readText()) {
             div {
@@ -64,3 +73,5 @@ class SubjectsViewModel : ViewModel() {
         }
     }
 }
+
+private typealias SubjectsState = ResponseStateModel<List<SubjectModel>>

@@ -23,7 +23,7 @@ fun DDZNavGraph(
         }
 
         composable(DDZRoutes.Subjects.route, arguments = DDZRoutes.Subjects.arguments!!) {
-            val grade = it.arguments?.getInt("class")!!
+            val grade = it.arguments?.getInt("grade")!!
             SubjectsScreen(grade = grade, navController = navController)
         }
 

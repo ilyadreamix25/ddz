@@ -24,9 +24,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import ua.ilyadreamix.idxcomponents.IDXDimen
 import ua.ilyadreamix.ddz.R
 import ua.ilyadreamix.ddz.etc.DDZDimen
-import ua.ilyadreamix.ddz.etc.changeAlphaOnPress
+import ua.ilyadreamix.idxcomponents.changeAlphaOnPress
 import ua.ilyadreamix.ddz.theme.DDZGreen
 import ua.ilyadreamix.ddz.theme.DDZRed
 import ua.ilyadreamix.ddz.theme.DDZYellow
@@ -53,7 +55,7 @@ fun GradesList(
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .padding(DDZDimen.ScreenSidesPadding),
+            .padding(IDXDimen.ScreenSidesPadding),
         contentPadding = WindowInsets.navigationBars.asPaddingValues(),
         verticalArrangement = Arrangement.spacedBy(DDZDimen.GridSpacing)
     ) {
@@ -89,6 +91,7 @@ fun GradeItem(
                 }
             ),
         backgroundColor = gradeInfo.color,
+        elevation = 0.dp,
         shape = RoundedCornerShape(DDZDimen.GradeItemCorners)
     ) {
         Row(
@@ -110,7 +113,7 @@ fun GradeItem(
             Icon(
                 imageVector = Icons.Rounded.KeyboardArrowRight,
                 contentDescription = null,
-                modifier = Modifier.size(DDZDimen.SmallButtonSize)
+                modifier = Modifier.size(IDXDimen.SmallButtonSize)
             )
         }
     }

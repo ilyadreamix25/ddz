@@ -1,4 +1,4 @@
-package ua.ilyadreamix.ddz.etc
+package ua.ilyadreamix.idxcomponents
 
 import android.view.MotionEvent
 import androidx.compose.animation.core.animateFloatAsState

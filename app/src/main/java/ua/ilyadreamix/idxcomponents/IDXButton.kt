@@ -1,4 +1,4 @@
-package ua.ilyadreamix.ddz.components
+package ua.ilyadreamix.idxcomponents
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
@@ -8,11 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import ua.ilyadreamix.ddz.etc.DDZDimen
-import ua.ilyadreamix.ddz.etc.changeAlphaOnPress
 
 @Composable
-fun DDZSmallIconButton(
+fun IDXSmallIconButton(
     imageVector: ImageVector,
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
@@ -22,7 +20,7 @@ fun DDZSmallIconButton(
         imageVector = imageVector,
         contentDescription = null,
         modifier = modifier
-            .size(DDZDimen.SmallButtonSize)
+            .size(IDXDimen.SmallButtonSize)
             .changeAlphaOnPress(onClick = onClick),
         tint = tint
     )

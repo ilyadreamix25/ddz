@@ -40,6 +40,7 @@ private val DDZLightColors = lightColors(
 fun DDZTheme(content: @Composable () -> Unit) {
     val view = LocalView.current
     val context = LocalContext.current
+    val isDarkTheme = isSystemInDarkTheme()
 
     if (!view.isInEditMode) {
         SideEffect {
@@ -47,14 +48,14 @@ fun DDZTheme(content: @Composable () -> Unit) {
             WindowCompat.setDecorFitsSystemWindows(window, false)
             WindowCompat.getInsetsController(window, view)
                 .apply {
-                    isAppearanceLightStatusBars = false
-                    isAppearanceLightNavigationBars = false
+                    isAppearanceLightStatusBars = !isDarkTheme
+                    isAppearanceLightNavigationBars = !isDarkTheme
                 }
         }
     }
 
     MaterialTheme(
-        colors = if (isSystemInDarkTheme()) DDZDarkColors else DDZLightColors,
+        colors = if (isDarkTheme) DDZDarkColors else DDZLightColors,
         typography = DDZTypo,
         content = {
             CompositionLocalProvider(

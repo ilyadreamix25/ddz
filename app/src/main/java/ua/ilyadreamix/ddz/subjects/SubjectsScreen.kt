@@ -14,8 +14,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import ua.ilyadreamix.ddz.components.DDZSmallIconButton
-import ua.ilyadreamix.ddz.components.DDZTopBar
+import ua.ilyadreamix.idxcomponents.IDXSmallIconButton
+import ua.ilyadreamix.idxcomponents.IDXTopBar
+import ua.ilyadreamix.ddz.components.DDZAppLogo
+import ua.ilyadreamix.ddz.etc.ResponseState
 
 @Composable
 fun SubjectsScreen(
@@ -24,7 +26,7 @@ fun SubjectsScreen(
     modifier: Modifier = Modifier
 ) {
     val subjectsViewModel = viewModel<SubjectsViewModel>()
-    val subjects by subjectsViewModel.subjects
+    val subjectsState by subjectsViewModel.subjectsState
 
     LaunchedEffect(Unit) {
         subjectsViewModel.updateSubjects(grade)
@@ -33,13 +35,16 @@ fun SubjectsScreen(
     Scaffold(
         modifier = modifier,
         topBar = {
-            DDZTopBar(
+            IDXTopBar(
                 modifier = Modifier.statusBarsPadding(),
                 endButtons = {
-                    DDZSmallIconButton(imageVector = Icons.Rounded.Menu)
+                    IDXSmallIconButton(imageVector = Icons.Rounded.Menu)
+                },
+                appLogo = {
+                    DDZAppLogo()
                 },
                 startButtons = {
-                    DDZSmallIconButton(imageVector = Icons.Rounded.ArrowBack) {
+                    IDXSmallIconButton(imageVector = Icons.Rounded.ArrowBack) {
                         navController.popBackStack()
                     }
                 }
@@ -48,8 +53,14 @@ fun SubjectsScreen(
     ) { insets ->
         // TODO: Full screen
         Box(modifier = Modifier.padding(insets)) {
-            if (subjects.isEmpty()) Text(text = "Loading...")
-            else Text(text = "Success!")
+            Text(
+                text = when (subjectsState.state) {
+                    ResponseState.Loading -> "Loading..."
+                    ResponseState.Success -> "Success! (${subjectsState.data!!.size} subjects)"
+                    ResponseState.Error -> "Error!"
+                    else -> "Idle"
+                }
+            )
         }
     }
 }

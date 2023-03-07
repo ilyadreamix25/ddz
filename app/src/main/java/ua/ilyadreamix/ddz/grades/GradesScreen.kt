@@ -8,8 +8,9 @@ import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import ua.ilyadreamix.ddz.components.DDZSmallIconButton
-import ua.ilyadreamix.ddz.components.DDZTopBar
+import ua.ilyadreamix.idxcomponents.IDXSmallIconButton
+import ua.ilyadreamix.idxcomponents.IDXTopBar
+import ua.ilyadreamix.ddz.components.DDZAppLogo
 
 @Composable
 fun GradesScreen(
@@ -19,10 +20,16 @@ fun GradesScreen(
     Scaffold(
         modifier = modifier,
         topBar = {
-            DDZTopBar(modifier = Modifier.statusBarsPadding()) {
-                DDZSmallIconButton(imageVector = Icons.Rounded.Menu)
-            }
-        }
+            IDXTopBar(
+                modifier = Modifier.statusBarsPadding(),
+                endButtons = {
+                    IDXSmallIconButton(imageVector = Icons.Rounded.Menu)
+                },
+                appLogo = {
+                    DDZAppLogo()
+                }
+            )
+        },
     ) { insets ->
         GradesList(modifier = Modifier.padding(insets)) { gradeInfo ->
             navController.navigate(gradeInfo.grade.toString())
